@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Udaan Career Counseling</title>
+    <link rel="stylesheet" href="/css/theme.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/auth-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body data-theme="light"> <header>
+        <nav class="navbar">
+            <div class="logo">Udaan</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <!-- Career Test Link -->
+                <li sec:authorize="!isAuthenticated()"><a href="#" onclick="event.preventDefault(); openModal('signin')" title="Please login to take the test">Career Test</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/career-test">Career Test</a></li>Z
+                
+                <!-- Resources Link -->
+                <li sec:authorize="!isAuthenticated()"><a href="#" onclick="event.preventDefault(); openModal('signin')" title="Please login to view resources">Resources</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/resources">Resources</a></li>
+
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+            <div class="theme-toggle-container">
+                <button id="theme-toggle-btn" class="btn-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <!-- User Profile / Login Icon -->
+            <div class="user-profile">
+                <!-- If user is authenticated, show name and link to dashboard -->
+                <div sec:authorize="isAuthenticated()" class="user-info">
+                   <a th:href="@{/dashboard}" class="name-icon" th:text="${loggedInUserFirstName != null and loggedInUserFirstName.length() > 0 ? loggedInUserFirstName.substring(0, 1) : '?'}"></a>
+                </div>
+                <!-- If user is not authenticated, show login icon -->
+                <i sec:authorize="!isAuthenticated()" class="fas fa-user-circle"></i>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-slider-container">
+            <div class="slide active-slide" style="background-image: url('images/index/hero-bg-1.avif');">
+                <div class="overlay">
+                    <h1>Discover Your Path</h1>
+                    <p>Let <strong>Udaan</strong> Guide Your <strong>Future</strong>.</p>
+                    <div class="hero-buttons">
+                        <!-- Link to Career Test if authenticated, otherwise open login modal -->
+                        <a sec:authorize="isAuthenticated()" th:href="@{/career-test}" class="btn btn-primary">Take Career Test</a>
+                        <button sec:authorize="!isAuthenticated()" onclick="openModal('signin')" class="btn btn-primary">Take Career Test</button>
+                    </div>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('images/index/hero-bg-2.avif');">
+                <div class="overlay">
+                    <h1>Explore Your Potential</h1>
+                    <p>Right Guidance. Right Career.</p>
+                    <div class="hero-buttons">
+                        <a th:href="@{/resources}" class="btn btn-primary">Explore Resources</a>
+                        <a sec:authorize="isAuthenticated()" th:href="@{/career-test}" class="btn btn-secondary">Take Career Test</a>
+                        <button sec:authorize="!isAuthenticated()" onclick="openModal('signin')" class="btn btn-secondary">Take Career Test</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <h2>Our Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Career Assessment</h3>
+                <p>Personalized pathways based on aptitude, personality, and skills.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-book-open"></i>
+                <h3>Resources</h3>
+                <p>Access guide and upskilling materials.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-comments"></i>
+                <h3>1-on-1 Counseling</h3>
+                <p>Book a private session with certified counselors to discuss your goals.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works-section">
+        <h2>How It Works</h2>
+        <p>Your journey to the perfect career starts with three simple steps</p>
+        <div class="steps-container">
+            <div class="step">
+                <span class="step-number">Step 1</span>
+                <h3>Take the Test</h3>
+                <p>Comprehensive assessment to identify your strengths, weaknesses, and aptitudes.</p>
+            </div>
+            <div class="step">
+                <span class="step-number">Step 2</span>
+                <h3>Explore Your Strengths</h3>
+                <p>Discover profound insight about your personality, interests, and career preferences.</p>
+            </div>
+            <div class="step">
+                <span class="step-number">Step 3</span>
+                <h3>Get Personalized Guidance</h3>
+                <p>Receive a tailored recommendation to chart the best path for your future.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="success-stories-section">
+        <h2>Success Stories</h2>
+        <p>Hear from students who found their path with Udaan</p>
+        
+        <div class="testimonial-slider-wrapper">
+            <div class="testimonial-slider-container" id="testimonial-slider">
+                <div class="testimonial-card slide-card active-card">
+                    <p>"Udaan helped me discover my passion for software development. <br> The assessment provided a very clear roadmap."</p>
+                    <p class="client-name">Priya Sharma</p>
+                </div>
+                <div class="testimonial-card slide-card">
+                    <p>"The online tools are incredibly helpful. I could explore so many fields <br>of learning, which allowed me to reach my full potential."</p>
+                    <p class="client-name">Syed Abbas</p>
+                </div>
+                <div class="testimonial-card slide-card">
+                    <p>"I was confused between CA and MBA. Udaan's resources and <br> 1-on-1 counseling made the decision so much easier."</p>
+                    <p class="client-name">Anusha Patel</p>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="prev-btn" id="prev-testimonial"><i class="fas fa-chevron-left"></i></button>
+                <button class="next-btn" id="next-testimonial"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Authentication Modal -->
+    <div class="modal-overlay" id="auth-modal">
+        <div class="auth-modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+
+            <!-- Sign Up Form (Initial View) -->
+            <div id="signup-form" class="auth-form active">
+                <h2>Create Account</h2>
+                <button class="btn btn-social"><i class="fab fa-google"></i> Continue with Google</button>
+                <div class="divider">OR</div>
+                <form action="/signup" method="post">
+                    <!-- Add this hidden input for CSRF token -->
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="signup-firstName">First Name</label>
+                            <input type="text" id="signup-firstName" name="firstName" placeholder="Enter your first name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-lastName">Last Name</label>
+                            <input type="text" id="signup-lastName" name="lastName" placeholder="Enter your last name" required>
+                        </div>
+                    </div>
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" name="email" placeholder="Enter your email" required >
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" name="password" placeholder="Create a password" required >
+                    <button type="submit" class="btn btn-primary" style="width:100%; margin-top: 15px;">Create Account</button>
+                </form>
+                <div class="auth-footer-link">
+                    Already have an account? <a href="#" onclick="event.preventDefault(); showTab('signin')">Sign In</a>
+                </div>
+            </div>
+
+            <!-- Sign In Form -->
+            <div id="signin-form" class="auth-form">
+                <h2>Welcome Back!</h2>
+                <div th:if="${param.error}" class="auth-error-message" style="display: block;">
+                    Something is wrong Email or Password
+                </div>
+                <form action="/login" method="post">
+                    <!-- Add this hidden input for CSRF token -->
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <label for="signin-email">Email</label>
+                    <input type="email" id="signin-email" name="username" placeholder="Enter your email" required>
+                    <label for="signin-password">Password <a href="#" class="forgot-link">Forgot?</a></label>
+                    <input type="password" id="signin-password" name="password" placeholder="Enter your password" required>
+                    <button type="submit" class="btn btn-primary" style="width:100%; margin-top: 15px;">Sign In</button>
+                </form>
+                <div class="auth-footer-link">
+                    Don't have an account? <a href="#" onclick="event.preventDefault(); showTab('signup')">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <p>Empowering students to discover their perfect career path through AI-driven guidance.</p>
+            </div>
+            <div class="quick-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="connect-with-us">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Udaan. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="/js/toggle.js"></script>
+    <script src="/js/slider.js"></script>
+    <script src="/js/auth-script.js"></script>
+</body>
+</html>

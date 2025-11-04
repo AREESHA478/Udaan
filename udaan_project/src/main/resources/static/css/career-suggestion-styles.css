@@ -1,0 +1,194 @@
+/* career-suggestion-styles.css */
+
+.career-suggestion-page-content {
+    padding: 40px 5%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.career-suggestion-page-content h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: var(--text-light);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 40px;
+}
+
+/* --- Intro Section --- */
+.suggestion-intro {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.intro-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+.btn-outline i { margin-right: 8px; }
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 128, 128, 0.2);
+}
+
+/* --- Personality & Skills Sections --- */
+.personality-profile-section h2, .skills-profile-section h2, .recommended-careers-section h2 {
+    text-align: left;
+    margin-bottom: 15px;
+}
+.traits-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+.trait-tag {
+    background-color: var(--bg-light);
+    color: var(--primary-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: transform 0.2s ease;
+}
+.trait-tag:hover {
+    transform: scale(1.08);
+    background-color: #e0e8f9;
+}
+
+/* --- Recommended Careers Section --- */
+.recommended-careers-section { margin-bottom: 40px; }
+.career-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+.career-card {
+    opacity: 0;
+    animation: fade-in-up 0.6s ease-out forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.career-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+}
+.career-cards-grid .career-card:nth-child(1) { animation-delay: 0.2s; }
+.career-cards-grid .career-card:nth-child(2) { animation-delay: 0.4s; }
+.career-cards-grid .career-card:nth-child(3) { animation-delay: 0.6s; }
+
+.match-score {
+    margin: 15px 0;
+}
+.match-score span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 5px 0;
+}
+.progress-fill {
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+}
+.score-label {
+    font-size: 0.8rem;
+    color: #888;
+}
+.view-path-btn {
+    margin-top: auto;
+    font-weight: bold;
+    align-self: flex-start;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+.view-path-btn:hover {
+    transform: translateX(5px);
+}
+.view-path-btn i {
+    transition: transform 0.3s ease;
+    display: inline-block;
+    margin-left: 5px;
+}
+.view-path-btn:hover i {
+    transform: translateX(3px);
+}
+
+/* --- Skills Bar Chart --- */
+.bar-chart-container {
+    display: flex;
+    margin-top: 20px;
+    height: 250px;
+}
+.y-axis {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    padding-right: 10px;
+    border-right: 1px solid #ccc;
+}
+.bars {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    padding-left: 20px;
+}
+.bar-item {
+    text-align: center;
+}
+.bar {
+    display: block; /* Ensure the bar is a block element */
+    width: 40px;
+    background-color: var(--secondary-color);
+    border-radius: 5px 5px 0 0;
+    margin: 0 auto 5px; /* Add some margin at the bottom */
+    height: 0; /* Initial height */
+    transition: height 0.8s ease-out; /* Add a smooth growing animation */
+}
+
+/* --- CTA Chat Section --- */
+.cta-chat-section { 
+    text-align: center; 
+    margin-top: 40px;
+}
+.cta-chat-section .btn i { margin-right: 10px; }
+
+/* --- Dark Mode --- */
+body[data-theme="dark"] .card {
+    background-color: #1e1e1e;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+body[data-theme="dark"] .btn-outline {
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+body[data-theme="dark"] .trait-tag {
+    background-color: #333;
+    color: var(--secondary-color);
+}
+body[data-theme="dark"] .trait-tag:hover {
+    background-color: #444;
+}
+body[data-theme="dark"] .progress-bar { background-color: #444; }
+body[data-theme="dark"] .score-label { color: #aaa; }
+body[data-theme="dark"] .y-axis { border-color: #555; }

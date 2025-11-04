@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Udaan</title>
+    <link rel="stylesheet" href="/css/theme.css"> 
+    <link rel="stylesheet" href="/css/dashboard-styles.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body data-theme="light" class="dashboard-body">
+    <div class="dashboard-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="/" class="back-arrow-link"><i class="fas fa-arrow-left back-arrow"></i></a>
+                <div class="logo">Udaan</div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="/dashboard" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a th:href="@{/resources}"><i class="fas fa-book-open"></i> Explore Resources</a></li>
+                    <li><a href="#"><i class="fas fa-star"></i> My Skills</a></li>
+                    <li><a th:href="@{/profile}"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <a th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="user-greeting-header">
+                <div class="user-profile-icon">
+                    <div class="name-icon" th:text="${loggedInUserFirstName != null and loggedInUserFirstName.length() > 0 ? loggedInUserFirstName.substring(0, 1) : '?'}"></div>
+                </div>
+                <h1>Welcome, <span th:text="${loggedInUserFirstName}">Areesha</span></h1>
+            </div>
+            
+            <section class="dashboard-grid">
+                
+                <!-- My Skills Card -->
+                <div class="my-skills-card card">
+                    <h2>My Skills</h2>
+                    <div class="skills-container">
+                        <p th:if="${#strings.isEmpty(currentUser.skills)}">You haven't taken the career test yet. Take it to discover your skills!</p>
+                        <span th:each="skill : ${!#strings.isEmpty(currentUser.skills) ? currentUser.skills.split(', ') : {}}" class="skill-tag" th:text="${skill}"></span>
+                    </div>
+                    <a th:href="@{/career-test}" class="btn btn-primary">Take Test</a>
+                </div>
+                <div class="career-test-card card" style="display:none;">
+                    <h2>Career Test</h2>
+                    <p>You completed the test</p>
+                </div>
+
+                <div class="upcoming-sessions-card card">
+                    <h2>Upcoming Sessions</h2>
+                    <div class="session-item">
+                        <h3>Interview Preparation</h3>
+                        <p class="session-date">May 25, 3:00 PM</p>
+                    </div>
+                </div>
+
+                <div class="career-recommendations-section grid-span-2">
+                    <h2>Career Recommendations</h2>
+                    <div th:if="${#strings.isEmpty(currentUser.careerRecommendations)}" class="no-recommendations">
+                        <p>Your career recommendations will appear here after you take the test.</p>
+                    </div>
+                    <div th:unless="${#strings.isEmpty(currentUser.careerRecommendations)}" class="recommendations-grid">
+                        <div th:each="rec : ${currentUser.careerRecommendations.split(', ')}" class="recommendation-item">
+                            <i class="fas fa-code"></i>
+                            <p th:text="${rec}">Recommendation</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="notification-section card">
+                    <h2>Notification</h2>
+                    <p>New Courses added</p>
+                    <p>Upcoming Sessions</p>
+                </div>
+
+                <div class="recent-activity-section grid-span-2">
+                    <h2>Recent Activity</h2>
+                    <p>No recent activity to show.</p>
+                    </div>
+
+            </section>
+        </main>
+    </div>
+    <script src="/js/toggle.js"></script>
+</body>
+</html>

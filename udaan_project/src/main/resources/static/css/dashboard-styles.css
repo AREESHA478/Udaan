@@ -1,0 +1,316 @@
+/* dashboard-styles.css */
+
+/* Hide navbar for dashboard body */
+.dashboard-body header.navbar {
+    display: none !important; 
+}
+.dashboard-body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    background-color: var(--bg-light);
+}
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- Sidebar Styling --- */
+.sidebar {
+    width: 250px;
+    background-color: var(--text-light); 
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s;
+}
+body[data-theme="dark"] .sidebar {
+    background-color: #2a2a2a;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 0 20px;
+}
+.sidebar-header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-left: 15px;
+}
+.back-arrow {
+    font-size: 1.2rem;
+    color: #666;
+    cursor: pointer;
+}
+.back-arrow-link {
+    color: inherit;
+}
+body[data-theme="dark"] .back-arrow {
+    color: #ccc;
+}
+
+.sidebar-nav {
+    flex-grow: 1;
+}
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+}
+.sidebar-nav a {
+    display: block;
+    padding: 15px 20px 15px 40px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 1rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+.sidebar-nav a i {
+    margin-right: 15px;
+    width: 20px;
+    text-align: center;
+}
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+    background-color: var(--bg-light); 
+    color: var(--primary-color);
+    border-left: 3px solid var(--primary-color);
+    padding-left: 37px; /* Adjust padding due to border */
+}
+body[data-theme="dark"] .sidebar-nav a:hover,
+body[data-theme="dark"] .sidebar-nav a.active {
+    background-color: #1a1a1a;
+}
+
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid #eee;
+}
+body[data-theme="dark"] .sidebar-footer {
+    border-top-color: #444;
+}
+.sidebar-footer a {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: bold;
+}
+.sidebar-footer i {
+    margin-right: 10px;
+}
+
+/* --- Main Dashboard Content --- */
+.dashboard-main {
+    flex-grow: 1;
+    padding: 40px 5%;
+}
+
+.user-greeting-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.user-greeting-header h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-left: 20px;
+}
+.user-greeting-header .name-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.8rem;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+}
+
+.card {
+    background-color: var(--text-light);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+body[data-theme="dark"] .card {
+    background-color: #2a2a2a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.career-test-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.career-test-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+.career-test-card p {
+    color: #666;
+    margin-bottom: 20px;
+}
+body[data-theme="dark"] .career-test-card p { color: #aaa; }
+
+/* My Skills Card */
+.my-skills-card {
+    display: flex;
+    flex-direction: column;
+}
+.my-skills-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+.my-skills-card .skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.my-skills-card .skill-tag {
+    background-color: var(--primary-color-light);
+    color: var(--primary-color);
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Upcoming Sessions Card */
+.upcoming-sessions-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+.session-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+body[data-theme="dark"] .session-item { border-bottom-color: #444; }
+.session-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.session-item h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+.session-date {
+    font-size: 0.9rem;
+    color: #888;
+}
+.btn-sm {
+    padding: 6px 15px;
+    font-size: 0.9rem;
+}
+
+/* Career Recommendations Section */
+.grid-span-2 {
+    grid-column: 1 / 3;
+}
+.career-recommendations-section h2, .recent-activity-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+.recommendations-grid {
+    display: flex;
+    gap: 30px;
+}
+.no-recommendations {
+    background-color: var(--bg-light);
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    color: var(--text-secondary-color);
+}
+.recommendation-item {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: var(--bg-light);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    flex: 1;
+}
+body[data-theme="dark"] .recommendation-item {
+    background-color: #3a3a3a;
+}
+.recommendation-item i {
+    font-size: 2rem;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+.recommendation-item p {
+    font-weight: 500;
+}
+
+/* Notification Section */
+.notification-section p {
+    margin-bottom: 10px;
+    color: #666;
+}
+body[data-theme="dark"] .notification-section p { color: #aaa; }
+
+/* Recent Activity Section */
+.activity-item {
+    border-left: 3px solid var(--primary-color);
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+.activity-item h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+.activity-date {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    margin-bottom: 5px;
+}
+.activity-item p {
+    color: #666;
+}
+body[data-theme="dark"] .activity-item p { color: #aaa; }
+
+/* --- Media Queries --- */
+@media (max-width: 992px) {
+    .sidebar {
+        width: 200px;
+    }
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    .grid-span-2 {
+        grid-column: auto;
+    }
+    .recommendations-grid {
+        flex-wrap: wrap;
+    }
+    .recommendation-item {
+        flex-basis: 45%;
+    }
+}
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+    }
+    .dashboard-main {
+        padding: 20px;
+    }
+    .user-greeting-header h1 {
+        font-size: 2rem;
+    }
+}

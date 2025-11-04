@@ -1,0 +1,295 @@
+/* index.css */
+
+/* --- Keyframe Animations --- */
+@keyframes kenburns {
+    0% { transform: scale(1.05) translate(0, 0); }
+    100% { transform: scale(1.2) translate(-2%, 1%); }
+}
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    position: relative;
+    height: 90vh;
+    color: #fff;
+    overflow: hidden;
+}
+.hero-slider-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.slide.active-slide {
+    opacity: 1;
+    animation: kenburns 20s infinite alternate-reverse ease-in-out;
+}
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+.overlay h1 {
+    font-size: 4rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+.overlay p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+.overlay p strong {
+    color: var(--secondary-color);
+}
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+}
+.hero-buttons .btn i {
+    margin-right: 8px;
+}
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+}
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
+
+}
+
+/* --- General Section Styling --- */
+.features-section, .how-it-works-section, .success-stories-section {
+    padding: 60px 5%;
+    text-align: center;
+}
+.features-section h2, .how-it-works-section h2, .success-stories-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+.how-it-works-section p, .success-stories-section p {
+    max-width: 600px;
+    margin: 0 auto 40px;
+    color: #666;
+}
+body[data-theme="dark"] .how-it-works-section p, 
+body[data-theme="dark"] .success-stories-section p {
+    color: #aaa;
+}
+
+/* --- Features Section --- */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+.feature-card {
+    background-color: var(--text-light);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    opacity: 0;
+    animation: fade-in-up 0.6s ease-out forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+}
+body[data-theme="dark"] .feature-card {
+    background-color: #333;
+    box-shadow: 0 4px 15px rgba(124, 124, 124, 0.235); /* Added shadow for visibility */
+}
+.features-grid .feature-card:nth-child(1) { animation-delay: 0.1s; }
+.features-grid .feature-card:nth-child(2) { animation-delay: 0.2s; }
+.features-grid .feature-card:nth-child(3) { animation-delay: 0.3s; }
+.features-grid .feature-card:nth-child(4) { animation-delay: 0.4s; }
+
+.feature-card i {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    background-color: rgba(0, 128, 128, 0.1);
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+.feature-card:hover i {
+    transform: rotate(15deg) scale(1.1);
+}
+.feature-card h3 {
+    margin-bottom: 10px;
+}
+
+/* --- How It Works Section --- */
+.how-it-works-section {
+    background-color: var(--bg-light); /* Changed to light background for contrast */
+}
+body[data-theme="light"] .how-it-works-section {
+    background-image: linear-gradient(45deg, #f9f9f9 25%, transparent 25%), linear-gradient(-45deg, #f9f9f9 25%, transparent 25%);
+    background-size: 20px 20px;
+}
+body[data-theme="dark"] .how-it-works-section {
+    background-color: #2a2a2a;
+}
+.steps-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    position: relative;
+}
+.step {
+    max-width: 300px;
+    position: relative;
+    padding: 20px;
+    opacity: 0;
+    animation: fade-in-up 0.6s ease-out forwards;
+    z-index: 1;
+}
+.step:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+
+/* Adding connecting arrows between steps */
+.step:not(:last-child)::after {
+    content: '\f061'; /* Font Awesome right arrow */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 35%;
+    right: -45px;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    opacity: 0.5;
+    transform: translateY(-50%);
+    z-index: -1;
+    animation: pulse 2s infinite;
+}
+.steps-container .step:nth-child(1) { animation-delay: 0.2s; }
+.steps-container .step:nth-child(2) { animation-delay: 0.4s; }
+.steps-container .step:nth-child(3) { animation-delay: 0.6s; }
+
+.step-number {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    display: block;
+    font-size: 1.2rem;
+}
+.step-icon {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.step:hover .step-icon {
+    transform: scale(1.2) rotate(-10deg);
+}
+
+
+/* --- Success Stories Section (Testimonials) --- */
+.testimonial-slider-wrapper {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.testimonial-slider-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+.testimonial-card {
+    min-width: 100%;
+    padding: 40px;
+    background-color: var(--text-light);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    box-sizing: border-box;
+}
+body[data-theme="dark"] .testimonial-card {
+    background-color: #424242; /* Made the card lighter for better visibility */
+}
+.testimonial-card p:first-child {
+    position: relative;
+    padding-left: 40px;
+}
+.testimonial-card p:first-child::before {
+    content: '\f10d'; /* Font Awesome quote-left icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 2rem;
+    color: var(--primary-color);
+    position: absolute;
+    top: -10px;
+    left: 0;
+    opacity: 0.15;
+}
+.testimonial-card p:first-child {
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+.client-name {
+    font-weight: bold;
+    color: var(--secondary-color) !important; /* Force the pink color */
+}
+.slider-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+.slider-controls button {
+    background-color: rgba(0,0,0,0.3);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.slider-controls button:hover {
+    background-color: var(--primary-color);
+}
+.prev-btn {
+    margin-left: 10px; /* Adjusted to bring the button inside */
+}
+.next-btn {
+    margin-right: 10px; /* Adjusted to bring the button inside */
+}

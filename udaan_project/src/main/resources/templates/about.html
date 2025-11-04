@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Udaan Career Counseling</title>
+    <link rel="stylesheet" href="/css/theme.css">
+    <link rel="stylesheet" href="/css/about-styles.css">
+    <link rel="stylesheet" href="/css/auth-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body data-theme="light">
+    <header>
+        <nav class="navbar">
+            <div class="logo">Udaan</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <!-- Career Test Link -->
+                <li sec:authorize="!isAuthenticated()"><a href="#" onclick="event.preventDefault(); openModal('signin')" title="Please login to take the test">Career Test</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/career-test">Career Test</a></li>
+                
+                <!-- Resources Link -->
+                <li sec:authorize="!isAuthenticated()"><a href="#" onclick="event.preventDefault(); openModal('signin')" title="Please login to view resources">Resources</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/resources">Resources</a></li>
+
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+            <div class="theme-toggle-container">
+                <button id="theme-toggle-btn" class="btn-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <!-- User Profile / Login Icon -->
+            <div class="user-profile">
+                <!-- If user is authenticated, show name and link to dashboard -->
+                <div sec:authorize="isAuthenticated()" class="user-info">
+                   <a th:href="@{/dashboard}" class="name-icon" th:text="${loggedInUserFirstName != null and loggedInUserFirstName.length() > 0 ? loggedInUserFirstName.substring(0, 1) : '?'}"></a>
+                </div>
+                <!-- If user is not authenticated, show login icon -->
+                <i sec:authorize="!isAuthenticated()" class="fas fa-user-circle"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="about-page-content">
+        
+        <section class="about-hero-section">
+            <div class="about-hero-text">
+                <p class="section-subtitle">ABOUT US</p>
+                <h1>Discover Your Perfect <br>Career Path with <strong>Udaan</strong></h1>
+                <p class="section-intro">An eminent team helping you achieve your full potential and embark on a fulfilling career journey.</p>
+            </div>
+            <div class="about-hero-image-container">
+                <img src="/images/about/about-hero-group.jpg" alt="Group of successful students" class="about-hero-image">
+                <div class="stats-card">
+                    <div class="stat-item">
+                        <h2>10,000+</h2>
+                        <p>Students Guided</p>
+                    </div>
+                    <div class="stat-separator"></div>
+                    <div class="stat-item">
+                        <h2>500+</h2>
+                        <p>Career Options Explored</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-choose-section">
+            <div class="reason-card">
+                <div class="reason-header">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>Why Choose Udaan?</h3>
+                </div>
+                <p>Our mission is to empower students with clarity, confidence, and the right guidance for their career journey. We believe everyone deserves the opportunity to achieve their full potential.</p>
+                <p>We are dedicated to providing the most advanced and personalized career counseling platform globally, helping students make informed and confident decisions about their future.</p>
+            </div>
+            <div class="reason-card">
+                <div class="reason-header">
+                    <i class="fas fa-cogs"></i>
+                    <h3>A platform that empowers individuals to improve</h3>
+                </div>
+                <p>Udaan is a tech-driven platform. We provide human-led guidance powered by AI, ensuring personalized roadmaps. That bridge the gap between human expertise and technological efficiency.</p>
+                <p>From initial assessments to in-depth resources, our platform helps students navigate the complex world of career choices and achieve personalized roadmaps to lifelong success.</p>
+            </div>
+        </section>
+
+        <section class="mission-section">
+            <div class="mission-image">
+                <img src="/images/about/mission-hands.webp" alt="Hands joined in support" class="responsive-img">
+            </div>
+            <div class="mission-text">
+                <h2>Our Mission</h2>
+                <p>To <strong>empower students with clarity, confidence, and the right guidance for their career journey</strong>.</p>
+            </div>
+        </section>
+
+        <section class="creation-story-section">
+            <div class="story-image">
+                <img src="/images/about/creation-students.jpg" alt="Students sitting on stairs" class="responsive-img">
+            </div>
+            <div class="story-text">
+                <h2>Why We Created <strong>Udaan</strong></h2>
+                <p>We saw students struggling with uncertain futures. Our goal is to use technology and human experience to bring clarity to career decisions. We help young people explore the world of work and prepare for future success.</p>
+            </div>
+        </section>
+        
+        <section class="mentors-section">
+            <h2>Meet Our Mentors</h2>
+            <div class="mentor-grid">
+                <div class="mentor-card">
+                    <img src="/images/about/sara-halik.jpg" alt="Dr. Sara Halik">
+                    <h3>Dr. Sara Halik</h3>
+                    <p>Expert Counselor, PhD</p>
+                    <div class="mentor-socials">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="mentor-card">
+                    <img src="/images/about/mehadi-akram.jpg" alt="Dr. Mehadi Akram">
+                    <h3>Dr. Mehadi Akram</h3>
+                    <p>Career & Life Coach, MS</p>
+                    <div class="mentor-socials">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="mentor-card">
+                    <img src="/images/about/anusha-shaikh.jpg" alt="Ms. Anusha Shaikh">
+                    <h3>Ms. Anusha Shaikh</h3>
+                    <p>M. Ed. & Psychology Trainee</p>
+                    <div class="mentor-socials">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-cta-section">
+            <p>Join <strong>Udaan</strong> today and take your <strong>first step</strong> towards your dream career.</p>
+            <button class="btn btn-primary">Start Your Journey</button>
+        </section>
+
+    </main>
+
+    <!-- Authentication Modal -->
+    <div class="modal-overlay" id="auth-modal">
+        <div class="auth-modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+
+            <!-- Sign Up Form (Initial View) -->
+            <div id="signup-form" class="auth-form active">
+                <h2>Create Account</h2>
+                <button class="btn btn-social"><i class="fab fa-google"></i> Continue with Google</button>
+                <div class="divider">OR</div>
+                <form action="/signup" method="post">
+                    <!-- Add this hidden input for CSRF token -->
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="signup-firstName">First Name</label>
+                            <input type="text" id="signup-firstName" name="firstName" placeholder="Enter your first name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-lastName">Last Name</label>
+                            <input type="text" id="signup-lastName" name="lastName" placeholder="Enter your last name" required>
+                        </div>
+                    </div>
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" name="email" placeholder="Enter your email" required>
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" name="password" placeholder="Create a password" required>
+                    <button type="submit" class="btn btn-primary" style="width:100%; margin-top: 15px;">Create Account</button>
+                </form>
+                <div class="auth-footer-link">
+                    Already have an account? <a href="#" onclick="event.preventDefault(); showTab('signin')">Sign In</a>
+                </div>
+            </div>
+
+            <!-- Sign In Form -->
+            <div id="signin-form" class="auth-form">
+                <h2>Welcome Back!</h2>
+                <div th:if="${param.error}" class="auth-error-message" style="display: block;">
+                    Something is wrong Email or Password
+                </div>
+                <form action="/login" method="post">
+                    <label for="signin-email">Email</label>
+                    <input type="email" id="signin-email" name="username" placeholder="Enter your email" required>
+                    <label for="signin-password">Password <a href="#" class="forgot-link">Forgot?</a></label>
+                    <input type="password" id="signin-password" name="password" placeholder="Enter your password" required>
+                    <button type="submit" class="btn btn-primary" style="width:100%; margin-top: 15px;">Sign In</button>
+                </form>
+                <div class="auth-footer-link">
+                    Don't have an account? <a href="#" onclick="event.preventDefault(); showTab('signup')">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <p>Empowering students to discover their perfect career path through AI-driven guidance.</p>
+            </div>
+            <div class="quick-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="connect-with-us">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Udaan. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="/js/toggle.js"></script>
+    <script src="/js/auth-script.js"></script>
+</body>
+</html>

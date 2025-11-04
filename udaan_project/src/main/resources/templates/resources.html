@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Udaan Career Counseling</title>
+    <link rel="stylesheet" href="/css/theme.css"> 
+    <link rel="stylesheet" href="/css/resources-styles.css"> 
+    <link rel="stylesheet" href="/css/auth-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body data-theme="light">
+    <header>
+        <nav class="navbar">
+            <div class="logo">Udaan</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <!-- Career Test Link -->
+                <li sec:authorize="!isAuthenticated()"><a href="#" onclick="event.preventDefault(); openModal('signin')" title="Please login to take the test">Career Test</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/career-test">Career Test</a></li>
+                
+                <!-- Resources Link -->
+                <li sec:authorize="!isAuthenticated()"><a href="#" onclick="event.preventDefault(); openModal('signin')" title="Please login to view resources">Resources</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/resources">Resources</a></li>
+
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+            <div class="theme-toggle-container">
+                <button id="theme-toggle-btn" class="btn-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <!-- User Profile / Login Icon -->
+            <div class="user-profile">
+                <!-- If user is authenticated, show name and link to dashboard -->
+                <div sec:authorize="isAuthenticated()" class="user-info">
+                   <a th-href="@{/dashboard}" class="name-icon" th:text="${loggedInUserFirstName != null and loggedInUserFirstName.length() > 0 ? loggedInUserFirstName.substring(0, 1) : '?'}"></a>
+                </div>
+                <!-- If user is not authenticated, show login icon -->
+                <i sec:authorize="!isAuthenticated()" class="fas fa-user-circle"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="resources-page-content">
+        
+        <section class="resources-hero-section">
+            <div class="resources-hero-overlay">
+                <p class="section-subtitle">YOUR FUTURE</p>
+                <h1>Explore Your Potential</h1>
+                <p class="section-intro">Dive into our extensive library of guides, articles, and tools to aid your career planning.</p>
+                </div>
+            <img src="/images/resources/resources-hero-bg.webp" alt="Students studying together" class="resources-hero-image">
+        </section>
+
+        <section class="featured-resources-section">
+            <h2 class="section-heading">Discover Our <strong>Featured Resources</strong></h2>
+            <p class="section-subtext">Featured guidance based on popular student choices.</p>
+            
+            <div class="featured-grid">
+                <div class="featured-card large-card">
+                    <img src="/images/resources/resource-1.jpg" alt="Person receiving coaching" class="featured-img">
+                    <div class="featured-content">
+                        <span class="category-tag">FEATURED GUIDE</span>
+                        <h3>Unlock Your Potential with Career Coaching</h3>
+                        <p>Learn how personalized guidance can accelerate your career growth and improve decision-making skills.</p>
+                        <div class="card-footer">
+                            <span class="read-time"><i class="fas fa-clock"></i> 5 min read</span>
+                            <a href="#" class="read-more-btn">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-cards-wrapper">
+                    <div class="featured-card small-card">
+                        <img src="/images/resources/resource-2.jpg" alt="Empty whiteboard" class="featured-img">
+                        <div class="featured-content">
+                            <span class="category-tag">TOOL</span>
+                            <h3>Career Path Finder</h3>
+                            <div class="card-footer">
+                                <span class="read-time"><i class="fas fa-star"></i> Popular</span>
+                                <a href="#" class="read-more-btn">Explore</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="featured-card small-card">
+                        <img src="/images/resources/resource-3.jpg" alt="Person talking on phone" class="featured-img">
+                        <div class="featured-content">
+                            <span class="category-tag">GUIDE</span>
+                            <h3>Talk to a Counselor</h3>
+                            <div class="card-footer">
+                                <span class="read-time"><i class="fas fa-book"></i> Booking Guide</span>
+                                <a href="#" class="read-more-btn">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="featured-card small-card">
+                        <img src="/images/resources/resource-4.jpg" alt="Laptop and notes" class="featured-img">
+                        <div class="featured-content">
+                            <span class="category-tag">GUIDE</span>
+                            <h3>Top 5 Leadership & Mentorship Guides</h3>
+                            <div class="card-footer">
+                                <span class="read-time"><i class="fas fa-chart-line"></i> Advanced</span>
+                                <a href="#" class="read-more-btn">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="blog-posts-section">
+            <h2 class="section-heading">Browse Our <strong>Latest Blog Posts</strong></h2>
+            <div class="blog-grid">
+                
+                <div class="blog-card">
+                    <img src="/images/resources/blog-1.jpg" alt="Job search" class="blog-img">
+                    <div class="blog-content">
+                        <span class="blog-category-tag">Career Tips</span>
+                        <h4>How to Find Your Dream Job</h4>
+                        <p>Essential steps to define your goals and land your ideal position in a competitive market.</p>
+                        <span class="read-time"><i class="fas fa-clock"></i> 4 min read</span>
+                    </div>
+                </div>
+                
+                <div class="blog-card">
+                    <img src="/images/resources/blog-2.jpg" alt="Digital transformation" class="blog-img">
+                    <div class="blog-content">
+                        <span class="blog-category-tag">Future Trends</span>
+                        <h4>Navigating Career Transformations</h4>
+                        <p>Understanding digital trends and upskilling for the future of the workplace and remote work environments.</p>
+                        <span class="read-time"><i class="fas fa-clock"></i> 6 min read</span>
+                    </div>
+                </div>
+                
+                <div class="blog-card">
+                    <img src="/images/resources/blog-3.webp" alt="Essential skills" class="blog-img">
+                    <div class="blog-content">
+                        <span class="blog-category-tag">Skill Building</span>
+                        <h4>Developing Essential Skills for Career Success</h4>
+                        <p>Focus on critical thinking, communication, and emotional intelligence for leadership roles.</p>
+                        <span class="read-time"><i class="fas fa-clock"></i> 5 min read</span>
+                    </div>
+                </div>
+                
+                <div class="blog-card">
+                    <img src="/images/resources/blog-4.webp" alt="Balance text" class="blog-img">
+                    <div class="blog-content">
+                        <span class="blog-category-tag">Work-Life</span>
+                        <h4>How to Find Balance in a Demanding Career</h4>
+                        <p>Strategies for managing stress, setting boundaries, and maintaining well-being while achieving professional goals.</p>
+                        <span class="read-time"><i class="fas fa-clock"></i> 7 min read</span>
+                    </div>
+                </div>
+                
+                <div class="blog-card">
+                    <img src="/images/resources/blog-5.avif" alt="Team meeting" class="blog-img">
+                    <div class="blog-content">
+                        <span class="blog-category-tag">Professional Growth</span>
+                        <h4>Unleash Your Potential in the Workplace</h4>
+                        <p>Tips for effective networking, seeking mentorship, and demonstrating value to advance your position.</p>
+                        <span class="read-time"><i class="fas fa-clock"></i> 4 min read</span>
+                    </div>
+                </div>
+                
+                <div class="blog-card">
+                    <img src="/images/resources/blog-6.webp" alt="Man looking thoughtful" class="blog-img">
+                    <div class="blog-content">
+                        <span class="blog-category-tag">Career Challenges</span>
+                        <h4>Overcoming Career Challenges with Resilience</h4>
+                        <p>Strategies for handling job loss, career changes, and workplace setbacks with a positive and flexible mindset.</p>
+                        <span class="read-time"><i class="fas fa-clock"></i> 5 min read</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="explore-hub-section">
+            <h2 class="section-heading">Explore The <strong>Udaan Resource Hub</strong></h2>
+            <div class="hub-grid">
+                
+                <div class="hub-card">
+                    <img src="/images/resources/hub-1.webp" alt="Tips for career success" class="hub-img">
+                    <div class="hub-content">
+                        <h4>10 Tips for Career Success</h4>
+                        <span class="hub-tag">#Motivation</span>
+                        <span class="hub-tag">#Guidance</span>
+                    </div>
+                </div>
+                
+                <div class="hub-card">
+                    <img src="/images/resources/hub-2.webp" alt="Interview tips" class="hub-img">
+                    <div class="hub-content">
+                        <h4>How to ace a Job Interview</h4>
+                        <span class="hub-tag">#Interviews</span>
+                        <span class="hub-tag">#Preparation</span>
+                        <button class="btn btn-primary hub-btn">View All</button>
+                    </div>
+                </div>
+                
+                <div class="hub-card">
+                    <img src="/images/resources/hub-3.avif" alt="Career transformation" class="hub-img">
+                    <div class="hub-content">
+                        <h4>Navigating Career Transitions</h4>
+                        <span class="hub-tag">#Change</span>
+                        <span class="hub-tag">#Trends</span>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <section class="resources-cta-section">
+            <h2 class="section-heading">Discover Your Perfect <strong>Career Path</strong> with <strong>Udaan</strong></h2>
+            <div class="cta-features-grid">
+                <div class="cta-feature-item">
+                    <i class="fas fa-search"></i>
+                    <h3>Career Exploration Tools</h3>
+                    <p>Interactive tools to narrow down your options based on interests and aptitude.</p>
+                </div>
+                <div class="cta-feature-item">
+                    <i class="fas fa-user-check"></i>
+                    <h3>Personalized Guidance</h3>
+                    <p>Access our 1-on-1 sessions for tailored advice.</p>
+                </div>
+                <div class="cta-feature-item">
+                    <i class="fas fa-book-open"></i>
+                    <h3>Future-Ready Resources</h3>
+                    <p>Free guides and upskilling material available exclusively for members.</p>
+                </div>
+            </div>
+            <!-- Link to Career Test if authenticated, otherwise open login modal -->
+            <a sec:authorize="isAuthenticated()" th:href="@{/career-test}" class="btn btn-primary">Start Your Journey</a>
+            <a sec:authorize="!isAuthenticated()" href="#" onclick="event.preventDefault(); openModal('signin')" class="btn btn-primary">Start Your Journey</a>
+        </section>
+
+    </main>
+
+    <!-- Authentication Modal -->
+    <div class="modal-overlay" id="auth-modal">
+        <div class="auth-modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+
+            <!-- Sign Up Form (Initial View) -->
+            <div id="signup-form" class="auth-form active">
+                <h2>Create Account</h2>
+                <button class="btn btn-social"><i class="fab fa-google"></i> Continue with Google</button>
+                <div class="divider">OR</div>
+                <form action="/signup" method="post">
+                    <!-- Add this hidden input for CSRF token -->
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="signup-firstName">First Name</label>
+                            <input type="text" id="signup-firstName" name="firstName" placeholder="Enter your first name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-lastName">Last Name</label>
+                            <input type="text" id="signup-lastName" name="lastName" placeholder="Enter your last name" required>
+                        </div>
+                    </div>
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" name="email" placeholder="Enter your email" required>
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" name="password" placeholder="Create a password" required>
+                    <button type="submit" class="btn btn-primary" style="width:100%; margin-top: 15px;">Create Account</button>
+                </form>
+                <div class="auth-footer-link">
+                    Already have an account? <a href="#" onclick="event.preventDefault(); showTab('signin')">Sign In</a>
+                </div>
+            </div>
+
+            <!-- Sign In Form -->
+            <div id="signin-form" class="auth-form">
+                <h2>Welcome Back!</h2>
+                <div th:if="${param.error}" class="auth-error-message" style="display: block;">
+                    Something is wrong Email or Password
+                </div>
+                <form action="/login" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <label for="signin-email">Email</label>
+                    <input type="email" id="signin-email" name="username" placeholder="Enter your email" required>
+                    <label for="signin-password">Password <a href="#" class="forgot-link">Forgot?</a></label>
+                    <input type="password" id="signin-password" name="password" placeholder="Enter your password" required>
+                    <button type="submit" class="btn btn-primary" style="width:100%; margin-top: 15px;">Sign In</button>
+                </form>
+                <div class="auth-footer-link">
+                    Don't have an account? <a href="#" onclick="event.preventDefault(); showTab('signup')">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <p>Empowering students to discover their perfect career path through AI-driven guidance.</p>
+            </div>
+            <div class="quick-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="connect-with-us">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Udaan. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="/js/toggle.js"></script>
+    <script src="/js/auth-script.js"></script>
+</body>
+</html>

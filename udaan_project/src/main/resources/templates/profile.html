@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Settings - Udaan</title>
+    <link rel="stylesheet" href="/css/theme.css">
+    <link rel="stylesheet" href="/css/dashboard-styles.css">
+    <link rel="stylesheet" href="/css/profile-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body data-theme="light" class="dashboard-body">
+    <div class="dashboard-container">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="/dashboard" class="back-arrow-link"><i class="fas fa-arrow-left back-arrow"></i></a>
+                <div class="logo">Udaan</div>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a th:href="@{/dashboard}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a th:href="@{/resources}"><i class="fas fa-search"></i> Explore Resources</a></li>
+                    <li><a href="#"><i class="fas fa-star"></i> My Skills</a></li>
+                    <li><a th:href="@{/profile}" class="active"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <h1>Profile Settings</h1>
+            <p class="page-subtitle">Manage your personal information and password.</p>
+
+            <!-- Success/Error Messages -->
+            <div th:if="${param.success}" class="alert alert-success" th:text="${param.success}"></div>
+            <div th:if="${param.error}" class="alert alert-danger" th:text="${param.error}"></div>
+
+            <div class="profile-forms-grid">
+                <!-- Update Profile Form -->
+                <div class="card">
+                    <h2>Update Profile Information</h2>
+                    <form th:action="@{/profile/update}" method="post" class="profile-form">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" th:value="${currentUser.firstName}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" th:value="${currentUser.lastName}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email (cannot be changed)</label>
+                            <input type="email" id="email" name="email" th:value="${currentUser.email}" readonly disabled>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </form>
+                </div>
+
+                <!-- Change Password Form -->
+                <div class="card">
+                    <h2>Change Password</h2>
+                    <form th:action="@{/profile/change-password}" method="post" class="profile-form">
+                        <div class="form-group">
+                            <label for="oldPassword">Current Password</label>
+                            <input type="password" id="oldPassword" name="oldPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">New Password</label>
+                            <input type="password" id="newPassword" name="newPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm New Password</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/js/toggle.js"></script>
+</body>
+</html>

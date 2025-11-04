@@ -1,0 +1,203 @@
+/* General Theme Styles */
+
+/* 1. CSS Variables for Theming */
+:root {
+    --primary-color: #008080; /* A professional teal/green */
+    --secondary-color: #f0477f; /* A vibrant pink */
+    --text-dark: #333;
+    --text-light: #ffffff;
+    --bg-light: #f4f7f9;
+    --bg-dark: #1e1e1e;
+    --font-family: 'Poppins', sans-serif;
+}
+
+/* Dark theme overrides */
+body[data-theme="dark"] {
+    --text-dark: #f0f0f0;
+    --text-light: #1e1e1e;
+    --bg-light: #2a2a2a;
+    --bg-dark: #f4f7f9;
+}
+
+
+/* 2. Basic Reset & Body Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    transition: background-color 0.3s, color 0.3s;
+    line-height: 1.6;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+/* 3. Header & Navigation */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: var(--text-light);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+body[data-theme="dark"] .navbar {
+    background-color: #2a2a2a;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--secondary-color);
+}
+
+.theme-toggle-container, .user-profile {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.btn-toggle {
+    background: none;
+    border: none;
+    color: var(--text-dark);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.name-icon{
+     
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.user-info{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.logout-link {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    transition: transform 0.2s ease;
+}
+.logout-link:hover { transform: scale(1.1); }
+
+/* 4. Buttons */
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 128, 128, 0.3);
+}
+
+/* 5. Footer */
+footer {
+    background-color: #333;
+    color: #f0f0f0;
+    padding: 40px 5%;
+    margin-top: 50px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-info, .quick-links, .connect-with-us {
+    flex: 1;
+    min-width: 200px;
+}
+
+footer h4 {
+    margin-bottom: 15px;
+    color: var(--secondary-color); /* Restored the heading color */
+}
+
+.social-icons a {
+    color: #f0f0f0;
+    margin-right: 15px;
+    font-size: 1.3rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.copyright {
+    text-align: center;
+    border-top: 1px solid #555;
+    padding-top: 20px;
+    font-size: 0.9rem;
+}
+
+.social-icons a:hover {
+    color: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+/* 6. Animations */
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
